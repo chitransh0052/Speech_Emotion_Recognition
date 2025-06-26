@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Speech-Based Emotion Recognition</title>
+    <!-- Link to External CSS File -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+
+</head>
+<body>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <div class="content">
+        <h2>Speech-Based Emotion Recognition</h2>
+        <p>Choose an option below to provide speech input for emotion recognition.</p>
+        <button onclick="startRecognition()">Record Speech</button>
+        <input type="file" accept="audio/*" onchange="uploadFile(event)">
+        <div class="output" id="output"></div>
+        <button onclick="downloadResults()">Download Results</button>            
+    </div>
+
+    <!-- <script>
+        function startRecognition() {
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            if (!SpeechRecognition) {
+                alert("Your browser does not support speech recognition.");
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'en-US';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            recognition.onstart = function() {
+                console.log("Speech recognition started...");
+            };
+
+            recognition.onspeechend = function() {
+                recognition.stop();
+            };
+
+            recognition.onresult = function(event) {
+                const transcript = event.results[0][0].transcript;
+                const confidence = event.results[0][0].confidence;
+                const outputDiv = document.getElementById("output");
+                outputDiv.innerHTML = `Recognized Text: ${transcript}<br>Confidence: ${confidence}`;
+            };
+
+            recognition.onerror = function(event) {
+                console.error("Error occurred in speech recognition: ", event.error);
+            };
+
+            recognition.start();
+        }
+
+        function uploadFile(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const audioData = e.target.result;
+                    const outputDiv = document.getElementById("output");
+                    outputDiv.innerHTML = "File uploaded successfully!";
+                    // Add your emotion recognition logic here
+                };
+                reader.readAsArrayBuffer(file);
+            } else {
+                alert("No file selected!");
+            }
+        }
+
+        function downloadResults() {
+            const outputDiv = document.getElementById("output");
+            const resultText = outputDiv.innerText;
+
+            if (!resultText) {
+                alert("No results to download!");
+                return;
+            }
+
+            const blob = new Blob([resultText], { type: 'text/plain' });
+            const url = window.URL.createObjectURL(blob);
+
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'speech_recognition_results.txt';
+            document.body.appendChild(a);
+            a.click();
+
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+        }
+    </script> -->
+</body>
+</html>
